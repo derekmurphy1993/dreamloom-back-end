@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class DreamsController < ProtectedController
-  before_action :set_dream, only: [:show, :update, :destroy]
+class DreamsController < OpenReadController #change to PROTECTED
+  before_action :set_dream, only: %i[show update destroy]
 
   # GET /dreams
   def index
@@ -41,6 +41,7 @@ class DreamsController < ProtectedController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_dream
       @dream = Dream.find(params[:id])
@@ -48,6 +49,6 @@ class DreamsController < ProtectedController
 
     # Only allow a trusted parameter "white list" through.
     def dream_params
-      params.require(:dream).permit(:date, :mood, :body)
+      params.require(:dream).permit(:date, :mood, :body, :user_id)
     end
 end
