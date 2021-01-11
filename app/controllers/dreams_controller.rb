@@ -35,9 +35,16 @@ class DreamsController < ProtectedController
     end
   end
 
+  # # DELETE /dreams/1
+  # def destroy
+  #   @dream.destroy
+  # end
+
   # DELETE /dreams/1
-  def destroy
-    @dream.destroy
+  def destroy_all
+    @dreams = current_user.dreams
+
+    @dreams.each(&:destroy)
   end
 
   private
