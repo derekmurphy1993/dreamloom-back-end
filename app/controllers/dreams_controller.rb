@@ -15,6 +15,14 @@ class DreamsController < ProtectedController
     render json: @dream
   end
 
+  # GET /sleepdata
+
+  def chart
+    @dreams = current_user.dreams.all.where(:created_at => (Date.today - 7)..(Date.today))
+
+    render json: @dreams
+  end
+
   # POST /dreams
   def create
     @dream = current_user.dreams.build(dream_params)
